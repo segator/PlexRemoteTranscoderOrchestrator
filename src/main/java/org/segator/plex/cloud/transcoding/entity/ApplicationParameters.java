@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package org.segator.plex.cloud.transcoding.entity;
 
 import com.myjeeva.digitalocean.DigitalOcean;
@@ -11,11 +6,8 @@ import com.myjeeva.digitalocean.pojo.Droplet;
 import com.myjeeva.digitalocean.pojo.Image;
 import com.myjeeva.digitalocean.pojo.Key;
 import com.myjeeva.digitalocean.pojo.Region;
-import java.io.File;
-import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Pattern;
@@ -35,6 +27,7 @@ public class ApplicationParameters implements InitializingBean {
     private String webServerIP;
     private String transcodeShareDirectoryIP;
     private Integer transcodeShareDirectoryPort;
+    private String transcodeShareDirectoryAuth;
     private Integer webServerPort;
     private String DORegion;
     private DigitalOcean DOClient;
@@ -66,6 +59,14 @@ public class ApplicationParameters implements InitializingBean {
 
     public String getDORegion() {
         return DORegion;
+    }
+
+    public String getTranscodeShareDirectoryAuth() {
+        return transcodeShareDirectoryAuth;
+    }
+
+    public void setTranscodeShareDirectoryAuth(String transcodeShareDirectoryAuth) {
+        this.transcodeShareDirectoryAuth = transcodeShareDirectoryAuth;
     }
 
     public String getTranscodeShareDirectoryIP() {
@@ -112,6 +113,7 @@ public class ApplicationParameters implements InitializingBean {
         System.setProperty("application.webServerPort", webServerPort.toString());
         System.setProperty("application.transcodeShareDirectoryIP", transcodeShareDirectoryIP);
         System.setProperty("application.transcodeShareDirectoryPort", transcodeShareDirectoryPort.toString());
+        System.setProperty("application.transcodeShareDirectoryAuth", transcodeShareDirectoryAuth);
     }
 
     public static ApplicationParameters createFromProperties() {
@@ -128,6 +130,7 @@ public class ApplicationParameters implements InitializingBean {
         appParams.setWebServerPort(Integer.valueOf(System.getProperty("application.webServerPort")));
         appParams.setTranscodeShareDirectoryIP(System.getProperty("application.transcodeShareDirectoryIP"));
         appParams.setTranscodeShareDirectoryPort(Integer.valueOf(System.getProperty("application.transcodeShareDirectoryPort")));
+        appParams.setTranscodeShareDirectoryAuth(System.getProperty("application.transcodeShareDirectoryAuth"));
     }
 
     public DigitalOcean getDOClient() {
@@ -186,7 +189,9 @@ public class ApplicationParameters implements InitializingBean {
         provisionFile = provisionFile.replaceAll(Pattern.quote("##mainhost##"), getWebServerIP()).
                 replaceAll(Pattern.quote("##smbhost##"), getTranscodeShareDirectoryIP()).
                 replaceAll(Pattern.quote("##smbport##"), getTranscodeShareDirectoryPort().toString()).
-                replaceAll(Pattern.quote("##webport##"), getWebServerPort().toString());
+                replaceAll(Pattern.quote("##webport##"), getWebServerPort().toString()).
+                replaceAll(Pattern.quote("##smbuser##"), getTranscodeShareDirectoryAuth().split(":")[0]).
+                replaceAll(Pattern.quote("##smbpass##"), getTranscodeShareDirectoryAuth().split(":")[1]);
 
         return provisionFile;
     }

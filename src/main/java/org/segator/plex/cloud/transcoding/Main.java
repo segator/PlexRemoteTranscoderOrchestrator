@@ -30,18 +30,21 @@ public class Main {
         }
         if (cmd.hasOption("webServerPort")) {
             appParams.setWebServerPort(Integer.valueOf(cmd.getOptionValue("webServerPort")));
-        }else{
-             appParams.setWebServerPort(80);
+        } else {
+            appParams.setWebServerPort(80);
         }
         if (cmd.hasOption("transcodeFileServerDomainName")) {
             appParams.setTranscodeShareDirectoryIP(cmd.getOptionValue("transcodeFileServerDomainName"));
-        }else{
+        } else {
             appParams.setTranscodeShareDirectoryIP(appParams.getWebServerIP());
         }
         if (cmd.hasOption("transcodeFileServerPort")) {
             appParams.setTranscodeShareDirectoryPort(Integer.valueOf(cmd.getOptionValue("transcodeFileServerPort")));
-        }else{
-             appParams.setTranscodeShareDirectoryPort(445);
+        } else {
+            appParams.setTranscodeShareDirectoryPort(445);
+        }
+        if (cmd.hasOption("transcodeFileServerUserPass")) {
+            appParams.setTranscodeShareDirectoryAuth(cmd.getOptionValue("transcodeFileServerPort"));
         }
         appParams.setToProperties();
 
@@ -64,10 +67,13 @@ public class Main {
         opt = new Option("webServerDomainName", true, "Web Server Domain Name or public ip");
         opt.setRequired(true);
         options.addOption(opt);
-        options.addOption(new Option("webServerPort", true, "Web Server public port"));        
+        options.addOption(new Option("webServerPort", true, "Web Server public port"));
         options.addOption(new Option("transcodeFileServerDomainName", true, "(SMB) File Server Domain Name or public ip"));
-        
+
         options.addOption(new Option("transcodeFileServerPort", true, "(SMB) File Server public port"));
+        opt = new Option("transcodeFileServerUserPass", true, "(SMB) User:Password");
+        opt.setRequired(true);
+        options.addOption(opt);
         return options;
     }
     private WebServer server;
