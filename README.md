@@ -29,9 +29,28 @@ apt-get install oracle-java8-installer
 ```
 
 1. Install tools: `apt-get install maven git`
-2. Download Project: `git clone https://github.com/segator/PlexRemoteTranscoderOrchestrator`
+2. Download Project: `git clone https://github.com/segator/PlexRemoteTranscoderOrchestrator.git`
 3. Enter directory: `cd PlexRemoteTranscoderOrchestrator`
-4. Compile Project: `maven clean install`
+4. Compile Project: `mvn clean install`
+
+The Jar file will be inside target directory
+
+## Execute Arguments
+
+`java -jar PlexCloudTranscoding-1.0-SNAPSHOT.jar arguments`
+
+
+| Argument   | Example Value | Description
+| ------------- | ------------- | ------------ |
+| digitalOceanToken | DOToken | Do Token needed to create Droplets |
+| digitalOceanRegion | am2 | Region where we deploy Droplets |
+| sshkey | /root/.ssh/id_rsa.pub | Public key we install to the deployed Droplet |
+| webServerDomainName | orchestrator.plexserver.com  | Domain/ip (with access from internet) where we deploy this application |
+| webServerPort | 8800 | port of the webServerDomainName (with access from internet) |
+| transcodeFileServerDomainName | drop.transcode.plexserver.com | Domain/Ip(with access from internet) where DO will write data |
+| transcodeFileServerPort | 445 | Port of the transcodeFileServerPort (with access from internet) |
+
+
 
 
 ## TODO
