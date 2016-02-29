@@ -1,8 +1,10 @@
 package org.segator.plex.cloud.transcoding;
 
+import java.util.Arrays;
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.CommandLineParser;
 import org.apache.commons.cli.DefaultParser;
+import org.apache.commons.cli.HelpFormatter;
 import org.apache.commons.cli.Option;
 import org.apache.commons.cli.Options;
 import org.segator.plex.cloud.transcoding.entity.ApplicationParameters;
@@ -10,9 +12,13 @@ import org.segator.plex.cloud.transcoding.entity.ApplicationParameters;
 public class Main {
 
     public static void main(String... anArgs) throws Exception {
+        if (Arrays.asList(anArgs).contains("--help")) {
+            HelpFormatter formatter = new HelpFormatter();
+            formatter.printHelp("java -jar PlexCloudTranscoding <arguments>", getOptions());
+            return;
+        }
 
         CommandLineParser parser = new DefaultParser();
-
         CommandLine cmd = parser.parse(getOptions(), anArgs);
         ApplicationParameters appParams = new ApplicationParameters();
         if (cmd.hasOption("digitalOceanToken")) {
@@ -69,6 +75,7 @@ public class Main {
         options.addOption(opt);
         options.addOption(new Option("webServerPort", true, "Web Server public port"));
         options.addOption(new Option("transcodeFileServerDomainName", true, "(SMB) File Server Domain Name or public ip"));
+        options.addOption(new Option("h", "help", false, "Help information"));
 
         options.addOption(new Option("transcodeFileServerPort", true, "(SMB) File Server public port"));
         opt = new Option("transcodeFileServerUserPass", true, "(SMB) User:Password");
