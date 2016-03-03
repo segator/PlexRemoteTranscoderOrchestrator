@@ -50,7 +50,7 @@ public class Main {
             appParams.setTranscodeShareDirectoryPort(445);
         }
         if (cmd.hasOption("transcodeFileServerUserPass")) {
-            appParams.setTranscodeShareDirectoryAuth(cmd.getOptionValue("transcodeFileServerPort"));
+            appParams.setTranscodeShareDirectoryAuth(cmd.getOptionValue("transcodeFileServerUserPass"));
         }
         appParams.setToProperties();
 

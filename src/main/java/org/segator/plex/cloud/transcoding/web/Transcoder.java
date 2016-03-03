@@ -36,6 +36,7 @@ public class Transcoder {
             }
             return transcoderBO.getFreeTranscoderMachine(plexUserSession);
         } catch (Exception ex) {
+            ex.printStackTrace();
             res.setStatus(500);
             return new ExceptionError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, ex.getClass().getCanonicalName() + " - " + ex.getMessage());
         }
