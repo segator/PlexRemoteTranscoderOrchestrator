@@ -150,7 +150,7 @@ public class ApplicationParameters implements InitializingBean {
         //Load SSH key
         for (Key sshKeyObjDO : getDOClient().getAvailableKeys(0).getKeys()) {
 
-            if (sshKeyObjDO.getPublicKey().equals(plexUserSshKeyPub)) {
+            if (sshKeyObjDO.getPublicKey().equals(plexUserSshKeyPub.trim())) {
                 this.sshKeyObj = sshKeyObjDO;
             }
         }
