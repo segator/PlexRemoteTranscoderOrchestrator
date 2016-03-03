@@ -18,6 +18,9 @@ public class PlexUserSession {
     private String plexDeviceName;
     @JsonProperty("X-Plex-Platform-Version")
     private Double plexPlatformVersion;
+
+    @JsonProperty("X-Plex-Client-Profile-Extra")
+    private String plexClientProfileExtra;
     @JsonProperty("session")
     private String session;
     @JsonProperty("X-Plex-Product")
@@ -69,6 +72,14 @@ public class PlexUserSession {
 
     public void setPlexChunked(Integer plexChunked) {
         this.plexChunked = plexChunked;
+    }
+
+    public String getPlexClientProfileExtra() {
+        return plexClientProfileExtra;
+    }
+
+    public void setPlexClientProfileExtra(String plexClientProfileExtra) {
+        this.plexClientProfileExtra = plexClientProfileExtra;
     }
 
     public String getPlexDeviceName() {
