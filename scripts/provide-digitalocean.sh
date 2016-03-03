@@ -9,7 +9,7 @@ export WEB_PORT='##webport##'
 #export GID_PLEX='500'
 #export UID_PLEX='500'
 
-wget http://$MAIN_HOST:$WEB_PORT/download/$MACHINE_ID/bWFjaGluZVJlZnJlc2gucHk= -O /usr/bin/machineRefresh.py
+wget http://$MAIN_HOST:$WEB_PORT/download/$MACHINE_ID/L2V0Yy90cmFuc2NvZGVyX29yY2hlc3RyYXRvci9tYWNoaW5lUmVmcmVzaC5weQ==?absolute=1 -O /usr/bin/machineRefresh.py
 chmod 777 /usr/bin/machineRefresh.py
 
 mkdir /transcode

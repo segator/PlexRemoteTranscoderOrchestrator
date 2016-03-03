@@ -16,6 +16,6 @@ public class TranscoderConstants {
     //public static long UNUSED_TIMEOUT_MACHINE = 153425345 * 60 * 1000;
     public static String DROPLET_IMAGE_PLEX_REMOTE_TRANSCODING = "PlexRemoteTranscoder";
     public static String DROPLET_BASE_BUILD_SLUG = "debian-8-x64";
-    public static String DROPLET_PROVISION_FILE_NAME = "provide-digitalocean.sh";
-    public static String DROPLET_ENTRY_POINT_FILE_NAME = "entrypoint-digitalocean.sh";
+    public static String DROPLET_PROVISION_FILE_NAME = "/etc/transcoder_orchestrator/provide-digitalocean.sh";
+    public static String DROPLET_ENTRY_POINT_FILE_NAME = "/etc/transcoder_orchestrator/entrypoint-digitalocean.sh";
 }
