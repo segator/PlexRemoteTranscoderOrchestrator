@@ -9,6 +9,10 @@ export SMB_USER='##smbuser##'
 export SMB_PASS='##smbpass##'
 export WEB_PORT='##webport##'
 
+addgroup --gid 911 abc
+adduser --disabled-password --gecos "" --uid 911 --gid 911 abc --home /var/lib/plexmediaserver --no-create-home
+
+
 #mount transcode ouput
 mount -t cifs -o user=$SMB_USER,pass=$SMB_PASS,port=$SMB_PORT //$SMB_HOST/transcode /transcode
 
