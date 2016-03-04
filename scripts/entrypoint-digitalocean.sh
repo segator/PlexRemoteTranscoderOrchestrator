@@ -9,8 +9,13 @@ export SMB_USER='##smbuser##'
 export SMB_PASS='##smbpass##'
 export WEB_PORT='##webport##'
 
+mkdir /var/lib/plexmediaserver
 addgroup --gid 911 abc
 adduser --disabled-password --gecos "" --uid 911 --gid 911 abc --home /var/lib/plexmediaserver --no-create-home
+mkdir /var/lib/plexmediaserver/.ssh
+cp /root/.ssh/authorized_keys /var/lib/plexmediaserver/.ssh/
+chown -R abc:abc /var/lib/plexmediaserver
+chown -R abc:abc /var/lib/plexmediaserver/.ssh
 
 
 #mount transcode ouput
