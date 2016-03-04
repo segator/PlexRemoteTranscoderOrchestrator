@@ -7,7 +7,7 @@ import java.util.Objects;
  *
  * @author isaac_000
  */
-public class PlexUserSession {
+ public class PlexUserSession {
 
     @JsonProperty("Accept-Language")
     private String acceptLanguage;
@@ -22,7 +22,7 @@ public class PlexUserSession {
     @JsonProperty("X-Plex-Device-Name")
     private String plexDeviceName;
     @JsonProperty("X-Plex-Platform-Version")
-    private Double plexPlatformVersion;
+    private String plexPlatformVersion;
 
     @JsonProperty("X-Plex-Client-Profile-Extra")
     private String plexClientProfileExtra;
@@ -95,11 +95,11 @@ public class PlexUserSession {
         this.plexDeviceName = plexDeviceName;
     }
 
-    public Double getPlexPlatformVersion() {
+    public String getPlexPlatformVersion() {
         return plexPlatformVersion;
     }
 
-    public void setPlexPlatformVersion(Double plexPlatformVersion) {
+    public void setPlexPlatformVersion(String plexPlatformVersion) {
         this.plexPlatformVersion = plexPlatformVersion;
     }
 

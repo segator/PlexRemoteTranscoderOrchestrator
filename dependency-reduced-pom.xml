@@ -80,7 +80,7 @@
               <transformers>
                 <transformer />
                 <transformer>
-                  <mainClass>com.sjl.Main</mainClass>
+                  <mainClass>org.segator.plex.cloud.transcoding.Main</mainClass>
                 </transformer>
                 <transformer>
                   <resource>META-INF/spring.handlers</resource>
