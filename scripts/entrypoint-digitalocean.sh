@@ -11,5 +11,10 @@ export WEB_PORT='##webport##'
 
 #mount transcode ouput
 mount -t cifs -o user=$SMB_USER,pass=$SMB_PASS,port=$SMB_PORT //$SMB_HOST/transcode /transcode
+
+#mount plexbinaries
+mount -t cifs -o user=$SMB_USER,pass=$SMB_PASS,port=$SMB_PORT //$SMB_HOST/plexmediaserver /usr/lib/plexmediaserver
+chmod +x /usr/lib/plexmediaserver/Resources/plex_transcoder
+
 #run machineRefresh Script
 screen -S machineNotifier -A -m -d python /usr/bin/machineRefresh.py $MAIN_HOST:$WEB_PORT
