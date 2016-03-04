@@ -7,15 +7,16 @@ import java.util.Objects;
  *
  * @author isaac_000
  */
-
- public class PlexUserSession {
+public class PlexUserSession {
 
     @JsonProperty("Accept-Language")
     private String acceptLanguage;
     private String subtitles;
+    private Integer includeCodecs;
     @JsonProperty("X-Plex-Chunked")
     private Integer plexChunked;
-    
+    @JsonProperty("X-Plex-Account")
+    private String plexAccount;
     @JsonProperty("X-Plex-Username")
     private String plexUsername;
     @JsonProperty("X-Plex-Device-Name")
@@ -126,6 +127,22 @@ import java.util.Objects;
         this.maxVideoBitrate = maxVideoBitrate;
     }
 
+    public Integer getIncludeCodecs() {
+        return includeCodecs;
+    }
+
+    public void setIncludeCodecs(Integer includeCodecs) {
+        this.includeCodecs = includeCodecs;
+    }
+
+    public String getPlexAccount() {
+        return plexAccount;
+    }
+
+    public void setPlexAccount(String plexAccount) {
+        this.plexAccount = plexAccount;
+    }
+
     public String getPlexUsername() {
         return plexUsername;
     }
@@ -134,7 +151,6 @@ import java.util.Objects;
         this.plexUsername = plexUsername;
     }
 
-    
     public Double getVideoQuality() {
         return videoQuality;
     }
