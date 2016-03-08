@@ -20,6 +20,7 @@ chown -R abc:abc /var/lib/plexmediaserver/.ssh
 
 #mount transcode ouput
 mount -t cifs -o user=$SMB_USER,pass=$SMB_PASS,port=$SMB_PORT //$SMB_HOST/transcode /transcode
+chmod 777 /transcode
 
 #mount plexbinaries
 mount -t cifs -o user=$SMB_USER,pass=$SMB_PASS,port=$SMB_PORT //$SMB_HOST/plexmediaserver /usr/lib/plexmediaserver
@@ -27,3 +28,6 @@ chmod +x /usr/lib/plexmediaserver/Resources/plex_transcoder
 
 #run machineRefresh Script
 screen -S machineNotifier -A -m -d python /usr/bin/machineRefresh.py $MAIN_HOST:$WEB_PORT
+
+#run plex data redirector
+screen -S plexRedirector -A -m -d socat TCP-LISTEN:32400,fork TCP:$MAIN_HOST:$WEB_PORT
