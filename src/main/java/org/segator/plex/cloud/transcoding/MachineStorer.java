@@ -8,6 +8,7 @@ package org.segator.plex.cloud.transcoding;
 import org.segator.plex.cloud.transcoding.constants.TranscoderConstants;
 import com.myjeeva.digitalocean.pojo.Droplet;
 import com.myjeeva.digitalocean.pojo.Droplets;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import org.segator.plex.cloud.transcoding.entity.ApplicationParameters;
@@ -25,6 +26,8 @@ public class MachineStorer implements InitializingBean {
 
     @Autowired
     private ApplicationParameters applicationParams;
+
+
 
     private List<TranscoderMachine> transcoderMachines;
 
@@ -47,7 +50,7 @@ public class MachineStorer implements InitializingBean {
 
     }
 
-    public synchronized void removeMachine(TranscoderMachine transcoderMachine) {
+    public synchronized void removeMachine(TranscoderMachine transcoderMachine) throws IOException, InterruptedException {
         transcoderMachines.remove(transcoderMachine);
     }
 

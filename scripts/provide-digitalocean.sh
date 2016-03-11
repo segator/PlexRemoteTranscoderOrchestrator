@@ -1,7 +1,7 @@
 #!/bin/bash
 
 apt-get -y update
-apt-get -y  install curl screen apt-transport-https ca-certificates samba-client cifs-utils socat
+apt-get -y  install curl screen apt-transport-https ca-certificates socat nfs-common
 #apt-get -y install unzip
 #Get Variables
 export MACHINE_ID=$(curl -s http://169.254.169.254/metadata/v1/id)

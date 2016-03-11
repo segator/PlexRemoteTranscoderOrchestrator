@@ -186,12 +186,8 @@ public class ApplicationParameters implements InitializingBean {
 
     public String parseScriptTemplate(String provisionTemplate) {
         String provisionFile = provisionTemplate.replace("\"", "\\\"");
-        provisionFile = provisionFile.replaceAll(Pattern.quote("##mainhost##"), getWebServerIP()).
-                replaceAll(Pattern.quote("##smbhost##"), getTranscodeShareDirectoryIP()).
-                replaceAll(Pattern.quote("##smbport##"), getTranscodeShareDirectoryPort().toString()).
-                replaceAll(Pattern.quote("##webport##"), getWebServerPort().toString()).
-                replaceAll(Pattern.quote("##smbuser##"), getTranscodeShareDirectoryAuth().split(":")[0]).
-                replaceAll(Pattern.quote("##smbpass##"), getTranscodeShareDirectoryAuth().split(":")[1]);
+        provisionFile = provisionFile.replaceAll(Pattern.quote("##mainhost##"), getWebServerIP()).                
+                replaceAll(Pattern.quote("##webport##"), getWebServerPort().toString());
 
         return provisionFile;
     }

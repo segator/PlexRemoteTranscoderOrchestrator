@@ -3,10 +3,6 @@
 #Get Variables
 export MACHINE_ID=$(curl -s http://169.254.169.254/metadata/v1/id)
 export MAIN_HOST='##mainhost##'
-export SMB_HOST='##smbhost##'
-export SMB_PORT='##smbport##'
-export SMB_USER='##smbuser##'
-export SMB_PASS='##smbpass##'
 export WEB_PORT='##webport##'
 
 mkdir /var/lib/plexmediaserver
@@ -19,11 +15,11 @@ chown -R abc:abc /var/lib/plexmediaserver/.ssh
 
 
 #mount transcode ouput
-mount -t cifs -o user=$SMB_USER,pass=$SMB_PASS,port=$SMB_PORT //$SMB_HOST/transcode /transcode
+mount -t nfs -o proto=tcp,port=2049 $MAIN_HOST:/transcode /transcode
 chmod 777 /transcode
 
 #mount plexbinaries
-mount -t cifs -o user=$SMB_USER,pass=$SMB_PASS,port=$SMB_PORT //$SMB_HOST/plexmediaserver /usr/lib/plexmediaserver
+mount -t nfs -o proto=tcp,port=2049 $MAIN_HOST:/usr/lib/plexmediaserver /usr/lib/plexmediaserver
 chmod +x /usr/lib/plexmediaserver/Resources/plex_transcoder
 
 #run machineRefresh Script

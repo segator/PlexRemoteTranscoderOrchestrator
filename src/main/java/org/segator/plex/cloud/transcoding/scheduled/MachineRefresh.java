@@ -5,10 +5,12 @@
  */
 package org.segator.plex.cloud.transcoding.scheduled;
 
+import com.myjeeva.digitalocean.exception.DigitalOceanException;
 import com.myjeeva.digitalocean.pojo.Delete;
 import java.util.ArrayList;
 import java.util.Date;
 import org.segator.plex.cloud.transcoding.MachineStorer;
+import org.segator.plex.cloud.transcoding.NFSConfigurerBO;
 import org.segator.plex.cloud.transcoding.constants.TranscoderConstants;
 import org.segator.plex.cloud.transcoding.entity.ApplicationParameters;
 import org.segator.plex.cloud.transcoding.entity.TranscoderMachine;
@@ -26,6 +28,8 @@ public class MachineRefresh {
     @Autowired
     private MachineStorer storerMachine;
     @Autowired
+    private NFSConfigurerBO NFSConfigurerBO;
+    @Autowired
     private ApplicationParameters applicationParameters;
 
     @Scheduled(fixedDelay = 5000)
@@ -36,16 +40,24 @@ public class MachineRefresh {
                 //if the droplet is new we need to refresh to get new data(like ipaddres etc..)
                 if (transcoderMachine.getMachineStatus().equals("new")) {
                     transcoderMachine.setDroplet(applicationParameters.getDOClient().getDropletInfo(transcoderMachine.getMachineID()));
+                      NFSConfigurerBO.addIP(transcoderMachine.getIp());
                 }
 
                 //If the machine is unused during X time we destroy the machine(Only if is not a builder VM)
                 if (!transcoderMachine.isBuilder()) {
                     long diference = now - transcoderMachine.getLastUsage();
                     if (diference > TranscoderConstants.UNUSED_TIMEOUT_MACHINE) {
-                        Delete delete = applicationParameters.getDOClient().deleteDroplet(transcoderMachine.getMachineID());
-                        if (delete.getIsRequestSuccess()) {
+                        try {
+                            Delete delete = applicationParameters.getDOClient().deleteDroplet(transcoderMachine.getMachineID());
+                            if (delete.getIsRequestSuccess()) {
+                                storerMachine.removeMachine(transcoderMachine);
+                                NFSConfigurerBO.removeIP(transcoderMachine.getIp());
+                                System.out.println("Delete Transcoding Machine:" + transcoderMachine.getMachineID());
+                            }
+                        } catch (DigitalOceanException doEx) {
                             storerMachine.removeMachine(transcoderMachine);
-                            System.out.println("Delete Transcoding Machine:" + transcoderMachine.getMachineID());
+                            doEx.printStackTrace();
+                            System.out.println("Deleted reference to transcoding machine:" + transcoderMachine.getMachineID());
                         }
                     }
                 }
