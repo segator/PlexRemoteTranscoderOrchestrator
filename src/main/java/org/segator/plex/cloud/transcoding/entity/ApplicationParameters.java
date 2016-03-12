@@ -111,9 +111,9 @@ public class ApplicationParameters implements InitializingBean {
         System.setProperty("application.sshkey", sshkey);
         System.setProperty("application.webServerIP", webServerIP);
         System.setProperty("application.webServerPort", webServerPort.toString());
-        System.setProperty("application.transcodeShareDirectoryIP", transcodeShareDirectoryIP);
-        System.setProperty("application.transcodeShareDirectoryPort", transcodeShareDirectoryPort.toString());
-        System.setProperty("application.transcodeShareDirectoryAuth", transcodeShareDirectoryAuth);
+//        System.setProperty("application.transcodeShareDirectoryIP", transcodeShareDirectoryIP);
+//        System.setProperty("application.transcodeShareDirectoryPort", transcodeShareDirectoryPort.toString());
+//        System.setProperty("application.transcodeShareDirectoryAuth", transcodeShareDirectoryAuth);
     }
 
     public static ApplicationParameters createFromProperties() {
@@ -128,9 +128,9 @@ public class ApplicationParameters implements InitializingBean {
         appParams.setSshkey(System.getProperty("application.sshkey"));
         appParams.setWebServerIP(System.getProperty("application.webServerIP"));
         appParams.setWebServerPort(Integer.valueOf(System.getProperty("application.webServerPort")));
-        appParams.setTranscodeShareDirectoryIP(System.getProperty("application.transcodeShareDirectoryIP"));
-        appParams.setTranscodeShareDirectoryPort(Integer.valueOf(System.getProperty("application.transcodeShareDirectoryPort")));
-        appParams.setTranscodeShareDirectoryAuth(System.getProperty("application.transcodeShareDirectoryAuth"));
+//        appParams.setTranscodeShareDirectoryIP(System.getProperty("application.transcodeShareDirectoryIP"));
+//        appParams.setTranscodeShareDirectoryPort(Integer.valueOf(System.getProperty("application.transcodeShareDirectoryPort")));
+//        appParams.setTranscodeShareDirectoryAuth(System.getProperty("application.transcodeShareDirectoryAuth"));
     }
 
     public DigitalOcean getDOClient() {
