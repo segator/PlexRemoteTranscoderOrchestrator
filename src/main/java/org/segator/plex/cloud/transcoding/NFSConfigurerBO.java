@@ -35,11 +35,10 @@ public class NFSConfigurerBO {
         }
     }
 
-    private void refreshExport() throws IOException, InterruptedException {
-        String a = "/exports 192.168.0.0/24(rw,sync,insecure,fsid=0,no_subtree_check,no_root_squash)";
+    private void refreshExport() throws IOException, InterruptedException {        
         String exportPermission = "";
         for (String ip : ipList) {
-            exportPermission += ip + " (rw,sync,insecure,fsid=0,no_subtree_check,no_root_squash) ";
+            exportPermission += ip + "(rw,sync,secure,no_subtree_check,root_squash) ";
         }
         String exportFileString = "/transcode " + exportPermission + "\n/usr/lib/plexmediaserver " + exportPermission;
         File exportsFile = new File("/etc/exports");
