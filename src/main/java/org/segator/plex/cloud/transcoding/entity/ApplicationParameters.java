@@ -25,9 +25,7 @@ public class ApplicationParameters implements InitializingBean {
     private String DOImageID;
     private String sshkey;
     private String webServerIP;
-    private String transcodeShareDirectoryIP;
-    private Integer transcodeShareDirectoryPort;
-    private String transcodeShareDirectoryAuth;
+    private String mediaDirectory;    
     private Integer webServerPort;
     private String DORegion;
     private DigitalOcean DOClient;
@@ -61,21 +59,15 @@ public class ApplicationParameters implements InitializingBean {
         return DORegion;
     }
 
-    public String getTranscodeShareDirectoryAuth() {
-        return transcodeShareDirectoryAuth;
+    public String getMediaDirectory() {
+        return mediaDirectory;
     }
 
-    public void setTranscodeShareDirectoryAuth(String transcodeShareDirectoryAuth) {
-        this.transcodeShareDirectoryAuth = transcodeShareDirectoryAuth;
+    public void setMediaDirectory(String mediaDirectory) {
+        this.mediaDirectory = mediaDirectory;
     }
 
-    public String getTranscodeShareDirectoryIP() {
-        return transcodeShareDirectoryIP;
-    }
-
-    public void setTranscodeShareDirectoryIP(String transcodeShareDirectoryIP) {
-        this.transcodeShareDirectoryIP = transcodeShareDirectoryIP;
-    }
+    
 
     public void setDORegion(String DORegion) {
         this.DORegion = DORegion;
@@ -83,14 +75,6 @@ public class ApplicationParameters implements InitializingBean {
 
     public String getSshkey() {
         return sshkey;
-    }
-
-    public Integer getTranscodeShareDirectoryPort() {
-        return transcodeShareDirectoryPort;
-    }
-
-    public void setTranscodeShareDirectoryPort(Integer transcodeShareDirectoryPort) {
-        this.transcodeShareDirectoryPort = transcodeShareDirectoryPort;
     }
 
     public void setSshkey(String sshkey) {
@@ -111,9 +95,8 @@ public class ApplicationParameters implements InitializingBean {
         System.setProperty("application.sshkey", sshkey);
         System.setProperty("application.webServerIP", webServerIP);
         System.setProperty("application.webServerPort", webServerPort.toString());
-//        System.setProperty("application.transcodeShareDirectoryIP", transcodeShareDirectoryIP);
-//        System.setProperty("application.transcodeShareDirectoryPort", transcodeShareDirectoryPort.toString());
-//        System.setProperty("application.transcodeShareDirectoryAuth", transcodeShareDirectoryAuth);
+        System.setProperty("application.mediaDirectory", mediaDirectory);
+
     }
 
     public static ApplicationParameters createFromProperties() {
@@ -128,9 +111,7 @@ public class ApplicationParameters implements InitializingBean {
         appParams.setSshkey(System.getProperty("application.sshkey"));
         appParams.setWebServerIP(System.getProperty("application.webServerIP"));
         appParams.setWebServerPort(Integer.valueOf(System.getProperty("application.webServerPort")));
-//        appParams.setTranscodeShareDirectoryIP(System.getProperty("application.transcodeShareDirectoryIP"));
-//        appParams.setTranscodeShareDirectoryPort(Integer.valueOf(System.getProperty("application.transcodeShareDirectoryPort")));
-//        appParams.setTranscodeShareDirectoryAuth(System.getProperty("application.transcodeShareDirectoryAuth"));
+        appParams.setMediaDirectory(System.getProperty("application.mediaDirectory"));
     }
 
     public DigitalOcean getDOClient() {

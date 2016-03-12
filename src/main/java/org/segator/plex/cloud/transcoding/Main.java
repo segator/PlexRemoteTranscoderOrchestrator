@@ -10,21 +10,21 @@ import org.apache.commons.cli.Options;
 import org.segator.plex.cloud.transcoding.entity.ApplicationParameters;
 
 public class Main {
-
+    
     public static void main(String... anArgs) throws Exception {
         if (Arrays.asList(anArgs).contains("--help")) {
             HelpFormatter formatter = new HelpFormatter();
             formatter.printHelp("java -jar PlexCloudTranscoding <arguments>", getOptions());
             return;
         }
-
+        
         CommandLineParser parser = new DefaultParser();
         CommandLine cmd = parser.parse(getOptions(), anArgs);
         ApplicationParameters appParams = new ApplicationParameters();
         if (cmd.hasOption("digitalOceanToken")) {
             appParams.setDOToken(cmd.getOptionValue("digitalOceanToken"));
         }
-
+        
         if (cmd.hasOption("digitalOceanRegion")) {
             appParams.setDORegion(cmd.getOptionValue("digitalOceanRegion"));
         }
@@ -39,28 +39,18 @@ public class Main {
         } else {
             appParams.setWebServerPort(80);
         }
-//        if (cmd.hasOption("transcodeFileServerDomainName")) {
-//            appParams.setTranscodeShareDirectoryIP(cmd.getOptionValue("transcodeFileServerDomainName"));
-//        } else {
-//            appParams.setTranscodeShareDirectoryIP(appParams.getWebServerIP());
-//        }
-//        if (cmd.hasOption("transcodeFileServerPort")) {
-//            appParams.setTranscodeShareDirectoryPort(Integer.valueOf(cmd.getOptionValue("transcodeFileServerPort")));
-//        } else {
-//            appParams.setTranscodeShareDirectoryPort(445);
-//        }
-//        if (cmd.hasOption("transcodeFileServerUserPass")) {
-//            appParams.setTranscodeShareDirectoryAuth(cmd.getOptionValue("transcodeFileServerUserPass"));
-//        }
+        if (cmd.hasOption("mediaDirectory")) {
+            appParams.setMediaDirectory(cmd.getOptionValue("mediaDirectory"));
+        }
         appParams.setToProperties();
-
+        
         new Main().start();
     }
-
+    
     private static Options getOptions() {
         // create Options object
         Options options = new Options();
-
+        
         Option opt = new Option("digitalOceanToken", true, "DigitalOcean Token");
         opt.setRequired(true);
         options.addOption(opt);
@@ -71,6 +61,9 @@ public class Main {
         opt.setRequired(true);
         options.addOption(opt);
         opt = new Option("webServerDomainName", true, "Web Server Domain Name or public ip");
+        opt.setRequired(true);
+        options.addOption(opt);
+        opt = new Option("mediaDirectory", true, "where plex get media files");
         opt.setRequired(true);
         options.addOption(opt);
         options.addOption(new Option("webServerPort", true, "Web Server public port"));
@@ -84,11 +77,11 @@ public class Main {
         return options;
     }
     private WebServer server;
-
+    
     public Main() {
         server = new WebServer(8800);
     }
-
+    
     public void start() throws Exception {
         server.start();
         server.join();

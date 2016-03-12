@@ -10,6 +10,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import org.apache.commons.io.FileUtils;
+import org.segator.plex.cloud.transcoding.entity.ApplicationParameters;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
@@ -19,6 +21,8 @@ import org.springframework.stereotype.Service;
 @Service
 public class NFSConfigurerBO {
 
+    @Autowired
+    private ApplicationParameters applicationParameters;
     private List<String> ipList = new ArrayList();
 
     public synchronized void addIP(String ip) throws IOException, InterruptedException {
@@ -40,7 +44,7 @@ public class NFSConfigurerBO {
         for (String ip : ipList) {
             exportPermission += ip + "(rw,sync,secure,no_subtree_check,root_squash) ";
         }
-        String exportFileString = "/transcode " + exportPermission + "\n/usr/lib/plexmediaserver " + exportPermission;
+        String exportFileString = "/transcode " + exportPermission + "\n/usr/lib/plexmediaserver " + exportPermission + "\n"+applicationParameters.getMediaDirectory() + " " + exportPermission;
         File exportsFile = new File("/etc/exports");
         if (exportsFile.exists()) {
             exportsFile.delete();
