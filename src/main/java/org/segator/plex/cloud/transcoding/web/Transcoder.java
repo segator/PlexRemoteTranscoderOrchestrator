@@ -1,12 +1,15 @@
 package org.segator.plex.cloud.transcoding.web;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.rmi.RemoteException;
 import java.util.Date;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.stream.Collectors;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.apache.commons.lang3.StringUtils;
@@ -42,23 +45,6 @@ public class Transcoder {
         }
     }
 
-//    @RequestMapping(value = "/getTranscoder/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-//    public @ResponseBody
-//    IJSON getTranscoderByID(@PathVariable("id") Integer id, HttpServletResponse res) {
-//        try {
-//            TranscoderMachine transcoderMachine = transcoderBO.getTranscoderMachine(id);
-//            if (transcoderMachine == null) {
-//                res.setStatus(404);
-//                return new ExceptionError(HttpServletResponse.SC_NOT_FOUND, "not found");
-//            } else {
-//                return transcoderMachine;
-//            }
-//
-//        } catch (Exception ex) {
-//            res.setStatus(500);
-//            return new ExceptionError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, ex.getClass().getCanonicalName() + " - " + ex.getMessage());
-//        }
-//    }
 
     @RequestMapping(value = "/setTranscoderStatus/{id}/{transStatus}")
     public @ResponseBody
@@ -106,8 +92,16 @@ public class Transcoder {
 
         System.out.println("InputStream");
         System.out.println(convertStreamToString(req.getInputStream()));
-
     }
+    @RequestMapping(value = "/log")
+    public void log(HttpServletRequest req, HttpServletResponse res) throws IOException{
+          try (BufferedReader buffer = new BufferedReader(new InputStreamReader(req.getInputStream()))) {
+            String reqContent =  buffer.lines().collect(Collectors.joining("\n"));
+            System.out.println(reqContent);
+        }
+        
+    }
+    
 
     @RequestMapping(value = "/mock/progress/{sessionID}")
     public void getMockProgress(@PathVariable("sessionID") String sessionID, HttpServletRequest req, HttpServletResponse res) throws IOException {
