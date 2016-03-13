@@ -9,7 +9,6 @@ import java.rmi.RemoteException;
 import java.util.Date;
 import java.util.Map;
 import java.util.Map.Entry;
-import java.util.stream.Collectors;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.apache.commons.lang3.StringUtils;
@@ -34,7 +33,7 @@ public class Transcoder {
     public @ResponseBody
     IJSON getTranscoder(@RequestBody final PlexUserSession plexUserSession, HttpServletRequest req, HttpServletResponse res) throws IOException {
         try {
-            if(plexUserSession.getPlexToken()==null){
+            if (plexUserSession.getPlexToken() == null) {
                 throw new RemoteException("NO plexToken defined");
             }
             return transcoderBO.getFreeTranscoderMachine(plexUserSession);
@@ -44,7 +43,6 @@ public class Transcoder {
             return new ExceptionError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, ex.getClass().getCanonicalName() + " - " + ex.getMessage());
         }
     }
-
 
     @RequestMapping(value = "/setTranscoderStatus/{id}/{transStatus}")
     public @ResponseBody
@@ -93,15 +91,12 @@ public class Transcoder {
         System.out.println("InputStream");
         System.out.println(convertStreamToString(req.getInputStream()));
     }
+
     @RequestMapping(value = "/log")
-    public void log(HttpServletRequest req, HttpServletResponse res) throws IOException{
-          try (BufferedReader buffer = new BufferedReader(new InputStreamReader(req.getInputStream()))) {
-            String reqContent =  buffer.lines().collect(Collectors.joining("\n"));
-            System.out.println(reqContent);
-        }
-        
+    public void log(HttpServletRequest req, HttpServletResponse res) throws IOException {
+        String reqContent = convertStreamToString(req.getInputStream());
+        System.out.println(reqContent);
     }
-    
 
     @RequestMapping(value = "/mock/progress/{sessionID}")
     public void getMockProgress(@PathVariable("sessionID") String sessionID, HttpServletRequest req, HttpServletResponse res) throws IOException {
