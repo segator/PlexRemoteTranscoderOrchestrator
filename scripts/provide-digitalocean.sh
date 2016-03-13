@@ -21,5 +21,7 @@ mkdir /usr/lib/plexmediaserver
 #rm /tmp/plexServer.zip
 #chmod -R 777 /usr/lib/plexmediaserver
 
+#remove ssh start on boot
+update-rc.d -f ssh remove
 ##Notify Server that we finish the build
 wget http://$MAIN_HOST:$WEB_PORT/finishTranscoderBuilderProcess/$MACHINE_ID

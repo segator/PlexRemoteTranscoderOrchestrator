@@ -94,7 +94,7 @@ public class Transcoder {
 
     @RequestMapping(value = "/log")
     public void log(HttpServletRequest req, HttpServletResponse res) throws IOException {
-        String reqContent = convertStreamToString(req.getInputStream());
+        String reqContent = convertStreamToString(req.getInputStream());req.getParameterMap();
         System.out.println(reqContent);
     }
 
