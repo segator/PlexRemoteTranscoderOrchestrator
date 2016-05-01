@@ -56,10 +56,10 @@ The Jar file will be inside target directory
 ## TODO
 - [x] Remote Transcoding Working
 - [ ] Do the application more parametrizable
-- [ ] Prepare Plex Wrapper Transcoder for Docker use
-- [ ] Create Docker
-- [ ] Extend Plex Docker with Plex Transcoder Wrapper
-- [ ] Create Docker Compose to do an automatic Plex Remote Transcoding with few parameters
+- [x] Prepare Plex Wrapper Transcoder for Docker use
+- [x] Create Docker
+- [x] Extend Plex Docker with Plex Transcoder Wrapper
+- [x] Create Docker Compose to do an automatic Plex Remote Transcoding with few parameters
 - [ ] Refactor Application to allow more microserver providers(Amazon,Google Cloud)
 
 
