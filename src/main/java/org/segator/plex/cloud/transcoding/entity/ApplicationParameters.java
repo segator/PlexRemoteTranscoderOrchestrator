@@ -25,10 +25,11 @@ public class ApplicationParameters implements InitializingBean {
     private String DOImageID;
     private String sshkey;
     private String webServerIP;
-    private String mediaDirectory;    
+    private String mediaDirectory;
     private Integer webServerPort;
     private String DORegion;
     private DigitalOcean DOClient;
+    private Integer VMTimeout;
     private Key sshKeyObj;
 
     public String getDOToken() {
@@ -67,7 +68,13 @@ public class ApplicationParameters implements InitializingBean {
         this.mediaDirectory = mediaDirectory;
     }
 
-    
+    public Integer getVMTimeout() {
+        return VMTimeout;
+    }
+
+    public void setVMTimeout(Integer VMTimeout) {
+        this.VMTimeout = VMTimeout;
+    }
 
     public void setDORegion(String DORegion) {
         this.DORegion = DORegion;
@@ -167,7 +174,7 @@ public class ApplicationParameters implements InitializingBean {
 
     public String parseScriptTemplate(String provisionTemplate) {
         String provisionFile = provisionTemplate.replace("\"", "\\\"");
-        provisionFile = provisionFile.replaceAll(Pattern.quote("##mainhost##"), getWebServerIP()).                
+        provisionFile = provisionFile.replaceAll(Pattern.quote("##mainhost##"), getWebServerIP()).
                 replaceAll(Pattern.quote("##webport##"), getWebServerPort().toString());
 
         return provisionFile;

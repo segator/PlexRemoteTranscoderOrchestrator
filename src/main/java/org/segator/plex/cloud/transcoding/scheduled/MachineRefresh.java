@@ -40,24 +40,22 @@ public class MachineRefresh {
                 //if the droplet is new we need to refresh to get new data(like ipaddres etc..)
                 if (transcoderMachine.getMachineStatus().equals("new")) {
                     transcoderMachine.setDroplet(applicationParameters.getDOClient().getDropletInfo(transcoderMachine.getMachineID()));
-                      NFSConfigurerBO.addIP(transcoderMachine.getIp());
+                    NFSConfigurerBO.addIP(transcoderMachine.getIp());
                 }
 
                 //If the machine is unused during X time we destroy the machine(Only if is not a builder VM)
                 if (!transcoderMachine.isBuilder()) {
                     long diference = now - transcoderMachine.getLastUsage();
-                    if (diference > TranscoderConstants.UNUSED_TIMEOUT_MACHINE) {
+                    if (diference > (applicationParameters.getVMTimeout() * 1000)) {
                         try {
                             Delete delete = applicationParameters.getDOClient().deleteDroplet(transcoderMachine.getMachineID());
-                            if (delete.getIsRequestSuccess()) {
-                                storerMachine.removeMachine(transcoderMachine);
-                                NFSConfigurerBO.removeIP(transcoderMachine.getIp());
-                                System.out.println("Delete Transcoding Machine:" + transcoderMachine.getMachineID());
-                            }
+                            System.out.println("Delete Transcoding Machine:" + transcoderMachine.getMachineID());
                         } catch (DigitalOceanException doEx) {
-                            storerMachine.removeMachine(transcoderMachine);
                             doEx.printStackTrace();
                             System.out.println("Deleted reference to transcoding machine:" + transcoderMachine.getMachineID());
+                        } finally {
+                            storerMachine.removeMachine(transcoderMachine);
+                            NFSConfigurerBO.removeIP(transcoderMachine.getIp());
                         }
                     }
                 }

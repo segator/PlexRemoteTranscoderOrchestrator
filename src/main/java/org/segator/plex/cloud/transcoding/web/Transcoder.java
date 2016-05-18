@@ -33,8 +33,8 @@ public class Transcoder {
     public @ResponseBody
     IJSON getTranscoder(@RequestBody final PlexUserSession plexUserSession, HttpServletRequest req, HttpServletResponse res) throws IOException {
         try {
-            if (plexUserSession.getPlexToken() == null) {
-                throw new RemoteException("NO plexToken defined");
+            if (plexUserSession.getSession()== null) {
+                throw new RemoteException("NO session defined");
             }
             return transcoderBO.getFreeTranscoderMachine(plexUserSession);
         } catch (Exception ex) {
@@ -98,17 +98,6 @@ public class Transcoder {
         System.out.println(reqContent);
     }
 
-    @RequestMapping(value = "/mock/progress/{sessionID}")
-    public void getMockProgress(@PathVariable("sessionID") String sessionID, HttpServletRequest req, HttpServletResponse res) throws IOException {
-
-        URL realProgress = new URL("http://192.168.0.155:32400/video/:/transcode/session/" + sessionID + "/progress?width=1920&height=1080");
-        HttpURLConnection httpCon = (HttpURLConnection) realProgress.openConnection();
-        httpCon.setDoOutput(true);
-        httpCon.setRequestMethod("PUT");
-        httpCon.connect();
-        httpCon.getOutputStream().close();
-        httpCon.disconnect();
-    }
 
     private static String convertStreamToString(java.io.InputStream is) {
         java.util.Scanner s = new java.util.Scanner(is).useDelimiter("\\A");

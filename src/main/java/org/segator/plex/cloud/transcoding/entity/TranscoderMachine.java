@@ -30,6 +30,7 @@ public class TranscoderMachine extends IJSON {
         this.name = name;
         this.setResult("OK");
         this.lastUsage = new Date().getTime();
+        plexUserSession = new PlexUserSession();
     }
 
     public PlexUserSession getPlexUserSession() {
