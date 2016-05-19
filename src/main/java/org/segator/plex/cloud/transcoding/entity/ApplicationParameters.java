@@ -103,6 +103,7 @@ public class ApplicationParameters implements InitializingBean {
         System.setProperty("application.webServerIP", webServerIP);
         System.setProperty("application.webServerPort", webServerPort.toString());
         System.setProperty("application.mediaDirectory", mediaDirectory);
+        System.setProperty("application.VMTimeout", VMTimeout.toString());
 
     }
 
@@ -119,6 +120,7 @@ public class ApplicationParameters implements InitializingBean {
         appParams.setWebServerIP(System.getProperty("application.webServerIP"));
         appParams.setWebServerPort(Integer.valueOf(System.getProperty("application.webServerPort")));
         appParams.setMediaDirectory(System.getProperty("application.mediaDirectory"));
+        appParams.setVMTimeout(Integer.valueOf(System.getProperty("application.VMTimeout")));
     }
 
     public DigitalOcean getDOClient() {
