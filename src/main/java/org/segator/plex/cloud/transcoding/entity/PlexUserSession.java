@@ -23,7 +23,10 @@ import java.util.Objects;
     private String plexDeviceName;
     @JsonProperty("X-Plex-Platform-Version")
     private String plexPlatformVersion;
-
+    @JsonProperty("X-Plex-Session-Identifier")
+    private String plexSessionIdentifier;
+    @JsonProperty("X-Plex-Device-Screen-Resolution")
+    private String plexDeviceScreenResolution;
     @JsonProperty("X-Plex-Client-Profile-Extra")
     private String plexClientProfileExtra;
     @JsonProperty("session")
@@ -103,6 +106,22 @@ import java.util.Objects;
         this.plexPlatformVersion = plexPlatformVersion;
     }
 
+    public String getPlexSessionIdentifier() {
+        return plexSessionIdentifier;
+    }
+
+    public void setPlexSessionIdentifier(String plexSessionIdentifier) {
+        this.plexSessionIdentifier = plexSessionIdentifier;
+    }
+
+    public String getPlexDeviceScreenResolution() {
+        return plexDeviceScreenResolution;
+    }
+
+    public void setPlexDeviceScreenResolution(String plexDeviceScreenResolution) {
+        this.plexDeviceScreenResolution = plexDeviceScreenResolution;
+    }
+    
     public String getSession() {
         return session;
     }
