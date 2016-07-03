@@ -16,6 +16,8 @@ chmod 777 /usr/bin/machineRefresh.py
 mkdir /transcode
 chmod 777 /transcode
 mkdir /usr/lib/plexmediaserver
+mkdir -p /config/Library/Application\ Support
+chmod 777 /config
 #wget http://$MAIN_HOST:$WEB_PORT/download/$MACHINE_ID/L3Vzci9saWIvcGxleG1lZGlhc2VydmVy?absolute=1 -O /tmp/plexServer.zip
 #unzip /tmp/plexServer.zip -d /usr/lib/plexmediaserver
 #rm /tmp/plexServer.zip

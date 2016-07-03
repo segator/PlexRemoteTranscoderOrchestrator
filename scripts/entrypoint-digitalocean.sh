@@ -23,6 +23,10 @@ chmod 777 /transcode
 mount -t nfs -o proto=tcp,port=2049 $MAIN_HOST:/usr/lib/plexmediaserver /usr/lib/plexmediaserver
 chmod +x /usr/lib/plexmediaserver/Resources/plex_transcoder
 
+#Mount Application Support
+mount -t nfs -o proto=tcp,port=2049 $MAIN_HOST:/config/Library/Application\ Support /config/Library/Application\ Support
+
+
 
 #run plex data redirector
 screen -S plexRedirector -A -m -d socat TCP-LISTEN:32400,fork TCP:$MAIN_HOST:$WEB_PORT

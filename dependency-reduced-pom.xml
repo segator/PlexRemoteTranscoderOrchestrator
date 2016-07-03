@@ -4,10 +4,22 @@
   <groupId>org.segator</groupId>
   <artifactId>PlexCloudTranscoding</artifactId>
   <name>PlexCloudTranscoding</name>
-  <version>1.0-SNAPSHOT</version>
+  <version>1.0.0.1</version>
   <build>
     <finalName>${project.artifactId}</finalName>
     <plugins>
+      <plugin>
+        <artifactId>maven-jar-plugin</artifactId>
+        <version>2.1</version>
+        <configuration>
+          <archive>
+            <manifest>
+              <addDefaultImplementationEntries>true</addDefaultImplementationEntries>
+              <addDefaultSpecificationEntries>true</addDefaultSpecificationEntries>
+            </manifest>
+          </archive>
+        </configuration>
+      </plugin>
       <plugin>
         <artifactId>maven-source-plugin</artifactId>
         <version>2.1.2</version>
@@ -60,7 +72,7 @@
       </plugin>
       <plugin>
         <artifactId>maven-shade-plugin</artifactId>
-        <version>2.0</version>
+        <version>2.1</version>
         <executions>
           <execution>
             <goals>

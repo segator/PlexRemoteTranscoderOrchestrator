@@ -24,6 +24,7 @@ import org.segator.plex.cloud.transcoding.MachineStorer;
 import org.segator.plex.cloud.transcoding.constants.TranscoderConstants;
 import org.segator.plex.cloud.transcoding.entity.ApplicationParameters;
 import org.segator.plex.cloud.transcoding.entity.TranscoderMachine;
+import org.segator.plex.cloud.transcoding.utils.VersionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
@@ -63,7 +64,6 @@ public class MachineImageBuilder {
                 }
             }
             if (machineBuild == null) {
-                Droplet buildDroplet = applicationParameters.getBasicDroplet("plexRemoteTranscoderBuild");
                 buildDroplet.setImage(baseImage);
                 File provisioningDigitalOcean = new File(TranscoderConstants.DROPLET_PROVISION_FILE_NAME);
                 String provisionTemplate = new String(Files.readAllBytes(Paths.get(provisioningDigitalOcean.getAbsolutePath())), "UTF-8");

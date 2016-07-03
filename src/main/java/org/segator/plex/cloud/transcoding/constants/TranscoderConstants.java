@@ -5,6 +5,8 @@
  */
 package org.segator.plex.cloud.transcoding.constants;
 
+import org.segator.plex.cloud.transcoding.utils.VersionUtils;
+
 /**
  *
  * @author isaac_000
@@ -13,7 +15,7 @@ public class TranscoderConstants {
 
     public static final String DROPLET_BASE_NAME = "Transcoder-";
     public static final int UNUSED_TIMEOUT_MACHINE = 10*60;
-    public static final String DROPLET_IMAGE_PLEX_REMOTE_TRANSCODING = "PlexRemoteTranscoder";
+    public static final String DROPLET_IMAGE_PLEX_REMOTE_TRANSCODING = "PlexRemoteTranscoder"+new VersionUtils().getVersion();
     public static final String DROPLET_BASE_BUILD_SLUG = "debian-8-x64";
     public static final String DROPLET_PROVISION_FILE_NAME = "/etc/transcoder_orchestrator/provide-digitalocean.sh";
     public static final String DROPLET_ENTRY_POINT_FILE_NAME = "/etc/transcoder_orchestrator/entrypoint-digitalocean.sh";

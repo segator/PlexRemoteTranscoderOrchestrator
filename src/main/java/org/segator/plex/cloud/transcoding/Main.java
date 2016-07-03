@@ -9,19 +9,20 @@ import org.apache.commons.cli.Option;
 import org.apache.commons.cli.Options;
 import org.segator.plex.cloud.transcoding.constants.TranscoderConstants;
 import org.segator.plex.cloud.transcoding.entity.ApplicationParameters;
+import org.segator.plex.cloud.transcoding.utils.VersionUtils;
 
 public class Main {
 
-    public static void main(String... anArgs) throws Exception {
+    public static void main(String... anArgs) throws Exception {       
         if (Arrays.asList(anArgs).contains("--help")) {
             HelpFormatter formatter = new HelpFormatter();
             formatter.printHelp("java -jar PlexCloudTranscoding <arguments>", getOptions());
             return;
         }
-
+        System.out.println(TranscoderConstants.DROPLET_IMAGE_PLEX_REMOTE_TRANSCODING);
+        ApplicationParameters appParams = new ApplicationParameters();
         CommandLineParser parser = new DefaultParser();
         CommandLine cmd = parser.parse(getOptions(), anArgs);
-        ApplicationParameters appParams = new ApplicationParameters();
         if (cmd.hasOption("digitalOceanToken")) {
             appParams.setDOToken(cmd.getOptionValue("digitalOceanToken"));
         }

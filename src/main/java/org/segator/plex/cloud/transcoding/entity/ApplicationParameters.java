@@ -21,6 +21,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class ApplicationParameters implements InitializingBean {
 
+
     private String DOToken;
     private String DOImageID;
     private String sshkey;

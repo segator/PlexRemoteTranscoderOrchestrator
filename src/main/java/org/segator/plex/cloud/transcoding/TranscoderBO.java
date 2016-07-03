@@ -36,6 +36,7 @@ public class TranscoderBO {
     private ApplicationParameters applicationParams;
 
     public synchronized TranscoderMachine getFreeTranscoderMachine(PlexUserSession plexUserSession) throws DigitalOceanException, RequestUnsuccessfulException, InterruptedException, UnsupportedEncodingException, IOException {
+        Thread.sleep(3000);
         long now = new Date().getTime();
         for (TranscoderMachine transcoderMachine : new ArrayList<TranscoderMachine>(storerMachine.getTranscoderMachines())) {
             //If the user have same session as the VM seems that he are seeking to the same movie so he have preferency to take this VM
