@@ -45,7 +45,7 @@ public class NFSConfigurerBO {
             exportPermission += ip + "(rw,sync,secure,no_subtree_check,root_squash) ";
         }
         String exportFileString = "/transcode " + exportPermission + "\n/usr/lib/plexmediaserver " + exportPermission + "\n"+
-                "/config/Library/Application Support " + exportPermission + "\n" +
+                "\"/config/Library/Application Support\" " + exportPermission + "\n" +
                 applicationParameters.getMediaDirectory() + " " + exportPermission;
         File exportsFile = new File("/etc/exports");
         if (exportsFile.exists()) {
