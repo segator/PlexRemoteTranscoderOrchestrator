@@ -64,6 +64,7 @@ public class MachineImageBuilder {
                 }
             }
             if (machineBuild == null) {
+                Droplet buildDroplet = applicationParameters.getBasicDroplet(TranscoderConstants.DROPLET_IMAGE_PLEX_REMOTE_TRANSCODING+"Build");
                 buildDroplet.setImage(baseImage);
                 File provisioningDigitalOcean = new File(TranscoderConstants.DROPLET_PROVISION_FILE_NAME);
                 String provisionTemplate = new String(Files.readAllBytes(Paths.get(provisioningDigitalOcean.getAbsolutePath())), "UTF-8");
