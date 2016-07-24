@@ -9,6 +9,7 @@ import java.util.Objects;
  */
  public class PlexUserSession {
 
+     private String hasMDE;
     @JsonProperty("Accept-Language")
     private String acceptLanguage;
     private String subtitles;
@@ -85,6 +86,15 @@ import java.util.Objects;
     public String getPlexClientProfileExtra() {
         return plexClientProfileExtra;
     }
+
+    public String getHasMDE() {
+        return hasMDE;
+    }
+
+    public void setHasMDE(String hasMDE) {
+        this.hasMDE = hasMDE;
+    }
+    
 
     public void setPlexClientProfileExtra(String plexClientProfileExtra) {
         this.plexClientProfileExtra = plexClientProfileExtra;
