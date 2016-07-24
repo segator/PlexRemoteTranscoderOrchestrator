@@ -23,7 +23,7 @@ public class PlexUserSession {
     @JsonProperty("X-Plex-Device-Name")
     private String plexDeviceName;
     @JsonProperty("X-Plex-Platform-Version")
-    private String plexPlatformVersion;
+    private Double plexPlatformVersion;
     @JsonProperty("X-Plex-Session-Identifier")
     private String plexSessionIdentifier;
     @JsonProperty("X-Plex-Device-Screen-Resolution")
@@ -107,11 +107,11 @@ public class PlexUserSession {
         this.plexDeviceName = plexDeviceName;
     }
 
-    public String getPlexPlatformVersion() {
+    public Double getPlexPlatformVersion() {
         return plexPlatformVersion;
     }
 
-    public void setPlexPlatformVersion(String plexPlatformVersion) {
+    public void setPlexPlatformVersion(Double plexPlatformVersion) {
         this.plexPlatformVersion = plexPlatformVersion;
     }
 
