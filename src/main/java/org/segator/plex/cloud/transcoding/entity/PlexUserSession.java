@@ -7,9 +7,9 @@ import java.util.Objects;
  *
  * @author isaac_000
  */
- public class PlexUserSession {
+public class PlexUserSession {
 
-     private String hasMDE;
+    private Integer hasMDE;
     @JsonProperty("Accept-Language")
     private String acceptLanguage;
     private String subtitles;
@@ -87,14 +87,13 @@ import java.util.Objects;
         return plexClientProfileExtra;
     }
 
-    public String getHasMDE() {
+    public Integer getHasMDE() {
         return hasMDE;
     }
 
-    public void setHasMDE(String hasMDE) {
+    public void setHasMDE(Integer hasMDE) {
         this.hasMDE = hasMDE;
     }
-    
 
     public void setPlexClientProfileExtra(String plexClientProfileExtra) {
         this.plexClientProfileExtra = plexClientProfileExtra;
@@ -131,7 +130,7 @@ import java.util.Objects;
     public void setPlexDeviceScreenResolution(String plexDeviceScreenResolution) {
         this.plexDeviceScreenResolution = plexDeviceScreenResolution;
     }
-    
+
     public String getSession() {
         return session;
     }
